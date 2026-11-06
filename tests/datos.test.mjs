@@ -157,3 +157,31 @@ test("el estudio queda en Envigado: ni en datos ni en la documentación aparece 
     assert.match(await readFile(raiz + "conocimiento_generado/SITIO.md", "utf8"), /Envigado/);
   }
 });
+
+test("SEO: cada página del menú tiene título y descripción propios, con largo razonable", async () => {
+  const s = await cargar("sitio.json");
+  const titulos = new Set(), descripciones = new Set();
+  for (const p of s.menu) {
+    const { meta } = await cargar(p.id + ".json");
+    assert.ok(meta?.titulo && meta?.descripcion, `${p.id}: falta meta.titulo o meta.descripcion`);
+    assert.ok(meta.titulo.length <= 65, `${p.id}: el título pasa de 65 caracteres (${meta.titulo.length})`);
+    assert.ok(meta.descripcion.length >= 90 && meta.descripcion.length <= 170, `${p.id}: la descripción debe tener entre 90 y 170 caracteres (${meta.descripcion.length})`);
+    assert.ok(!/gratis/i.test(meta.titulo + meta.descripcion), `${p.id}: no puede decir "gratis"`);
+    titulos.add(meta.titulo); descripciones.add(meta.descripcion);
+  }
+  assert.equal(titulos.size, s.menu.length, "hay títulos repetidos entre páginas");
+  assert.equal(descripciones.size, s.menu.length, "hay descripciones repetidas entre páginas");
+});
+
+test("SEO: ninguna foto de los datos queda sin texto alternativo", async () => {
+  const faltan = [];
+  const recorrer = (o, ruta, archivo) => {
+    if (Array.isArray(o)) return o.forEach((v, i) => recorrer(v, `${ruta}[${i}]`, archivo));
+    if (o && typeof o === "object") {
+      if ("imagen" in o && o.imagen && !String(o.alt ?? "").trim()) faltan.push(`${archivo} › ${ruta}`);
+      for (const [k, v] of Object.entries(o)) recorrer(v, ruta ? `${ruta}.${k}` : k, archivo);
+    }
+  };
+  for (const n of ["inicio", "la-casa", "clases", "membresia", "contacto"]) recorrer(await cargar(n + ".json"), "", n);
+  assert.deepEqual(faltan, [], "fotos sin alt");
+});
