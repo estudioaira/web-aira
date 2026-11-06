@@ -1,0 +1,11 @@
+---
+// Marco de foto: recto, sin esquinas redondeadas. Todas las fotos de una cuadrícula
+// comparten la misma proporción (cuadrada por defecto) para que queden del mismo tamaño.
+const { ratio = "1 / 1", clase = "" } = Astro.props;
+---
+<div class:list={["recuadro", clase]} style={`--r:${ratio}`}><slot /></div>
+
+<style>
+  .recuadro { aspect-ratio: var(--r); overflow: hidden; background: var(--arena); border-radius: 0; }
+  .recuadro :global(img) { width: 100%; height: 100%; object-fit: cover; }
+</style>

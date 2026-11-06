@@ -1,0 +1,83 @@
+---
+import sitio from "../datos/sitio.json";
+import contacto from "../datos/contacto.json";
+import { ruta } from "../lib/ruta.js";
+const f = contacto.formulario;
+const c = f.campos;
+---
+<div class="formwrap">
+  <h2 class="form__titulo">{f.titulo}</h2>
+  <p class="form__texto">{f.texto}</p>
+  <form class="form" id="formContacto" novalidate data-wa={sitio.contacto.whatsapp} data-plantilla={f.plantilla}>
+    <div class="campo"><label for="f-nombre">{c.nombre}</label><input id="f-nombre" name="nombre" type="text" autocomplete="name" required /></div>
+    <div class="campo"><label for="f-telefono">{c.telefono}</label><input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required /></div>
+    <div class="campo"><label for="f-correo">{c.correo}</label><input id="f-correo" name="correo" type="email" autocomplete="email" /></div>
+    <div class="campo">
+      <label for="f-motivo">{c.motivo}</label>
+      <select id="f-motivo" name="motivo" required>
+        <option value="">{c.elegir}</option>
+        {f.motivos.map((m) => <option value={m}>{m}</option>)}
+      </select>
+    </div>
+    <div class="campo"><label for="f-mensaje">{c.mensaje}</label><textarea id="f-mensaje" name="mensaje" rows="4"></textarea></div>
+    <div class="campo campo--check">
+      <input id="f-consentimiento" name="consentimiento" type="checkbox" required />
+      <label for="f-consentimiento">{f.consentimiento}. <a href={ruta("/tratamiento-datos")}>{f.consentimientoEnlace}</a></label>
+    </div>
+    <p class="form__error" id="formError" role="alert" hidden>{f.error}</p>
+    <button class="form__enviar" type="submit">{f.boton}</button>
+    <p class="form__aviso">{f.aviso}</p>
+  </form>
+  <noscript><p class="form__aviso">{f.sinJs}</p></noscript>
+</div>
+
+<script>
+  import { validarContacto, mensajeContacto } from "../lib/formulario.js";
+  import { enlaceWa } from "../lib/wa.js";
+
+  const form = document.getElementById("formContacto") as HTMLFormElement | null;
+  if (form) {
+    const error = document.getElementById("formError") as HTMLElement;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const datos = {
+        nombre: String(fd.get("nombre") ?? ""),
+        telefono: String(fd.get("telefono") ?? ""),
+        correo: String(fd.get("correo") ?? ""),
+        motivo: String(fd.get("motivo") ?? ""),
+        mensaje: String(fd.get("mensaje") ?? ""),
+        consentimiento: fd.get("consentimiento") === "on",
+      };
+      const { ok, errores } = validarContacto(datos);
+      form.querySelectorAll<HTMLElement>("input, select, textarea").forEach((el) => {
+        el.setAttribute("aria-invalid", String(Boolean((errores as Record<string, boolean>)[el.getAttribute("name") ?? ""])));
+      });
+      error.hidden = ok;
+      if (!ok) { (form.querySelector('[aria-invalid="true"]') as HTMLElement | null)?.focus(); return; }
+      const texto = mensajeContacto(form.dataset.plantilla ?? "", datos);
+      window.open(enlaceWa(form.dataset.wa ?? "", texto), "_blank", "noopener");
+    });
+  }
+</script>
+
+<style>
+  .formwrap { display: grid; gap: 1rem; align-content: start; }
+  .form__titulo { margin: 0; font-weight: 100; font-size: clamp(2.125rem, 1.5rem + 2vw, 3rem); line-height: 1.08; }
+  .form__texto { margin: 0; color: var(--texto-suave); }
+  .form { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
+  .campo { display: grid; gap: 0.4rem; }
+  .campo label { font-size: 0.95rem; }
+  input, select, textarea { font: inherit; color: var(--espresso); background: transparent; border: 1px solid var(--espresso); border-radius: 0; padding: 0.85rem 1rem; min-height: 48px; width: 100%; }
+  textarea { resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--espresso); outline-offset: 3px; }
+  [aria-invalid="true"] { border-width: 2px; border-color: #8a2f25; }
+  .campo--check { grid-template-columns: auto 1fr; align-items: start; gap: 0.75rem; }
+  .campo--check input { width: 28px; height: 28px; min-height: 28px; padding: 0; accent-color: var(--espresso); margin-top: 2px; }
+  .campo--check a { text-decoration: underline; text-underline-offset: 4px; }
+  .form__error { margin: 0; color: #8a2f25; font-weight: 600; }
+  .form__enviar { justify-self: start; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0.9rem 2rem; border-radius: 999px; border: 1px solid var(--espresso); background: var(--espresso); color: var(--marfil); font-family: var(--font-etiqueta); font-weight: 400; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; transition: background 0.5s var(--ease), color 0.5s var(--ease); }
+  .form__enviar:hover { background: transparent; color: var(--espresso); }
+  @media (max-width: 480px) { .form__enviar { justify-self: stretch; } }
+  .form__aviso { margin: 0; font-size: 0.875rem; color: var(--texto-suave); }
+</style>

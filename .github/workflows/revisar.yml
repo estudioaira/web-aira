@@ -1,0 +1,31 @@
+# Revisa el sitio en cada cambio.
+#
+# Quien edita el sitio es un asistente conversando con la dueña: un error en un archivo de
+# textos podría dejar una página en blanco. Si algo está mal, este trabajo falla, el
+# despliegue no ocurre y el sitio publicado sigue funcionando como estaba.
+name: Revisar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Compilar
+        run: npm run build
+        env:
+          PUBLIC_BASE: ${{ vars.PUBLIC_BASE || '/' }}
+          PUBLIC_SITE: ${{ vars.PUBLIC_SITE || format('https://{0}.github.io', github.repository_owner) }}
+      - name: Pruebas
+        run: npm test

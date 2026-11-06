@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "../components/Encabezado.astro";
+import Foto from "../components/Foto.astro";
+import Recuadro from "../components/Recuadro.astro";
+import Boton from "../components/Boton.astro";
+import BloqueReserva from "../components/BloqueReserva.astro";
+import d from "../datos/clases.json";
+import sitio from "../datos/sitio.json";
+import { enlaceWa } from "../lib/wa.js";
+---
+<Layout titulo={d.meta.titulo} descripcion={d.meta.descripcion} activa="clases">
+  <section class="seccion cabecera-pagina">
+    <div class="contenedor"><Encabezado nivel={1} etiqueta={d.encabezado.etiqueta} titulo={d.encabezado.titulo} texto={d.encabezado.texto} alinear="centro" /></div>
+  </section>
+
+  <section class="contenedor eventos">
+    <div class="contenedor">
+      <div class="eventos__grid">
+        {d.eventos.items.map((e) => (
+          <article class="evento rev">
+            <Recuadro ratio="1 / 1"><Foto base={e.imagen} alt={e.alt} sizes="(min-width: 1100px) 24vw, (min-width: 600px) 45vw, 92vw" /></Recuadro>
+            <h3>{e.titulo}</h3>
+            <p>{e.texto}</p>
+            <div><Boton texto={sitio.ui.cotizar} href={enlaceWa(sitio.contacto.whatsapp, e.mensaje)} variante="contorno" externo /></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contenedor momentos">
+    <Encabezado titulo={d.momentos.titulo} alinear="centro" />
+    <ul class="momentos__grid">
+      {d.momentos.items.map((m) => (
+        <li class="rev"><Recuadro ratio="1 / 1"><Foto base={m.imagen} alt={m.alt} sizes="(min-width: 900px) 23vw, 46vw" /></Recuadro></li>
+      ))}
+    </ul>
+  </section>
+
+  <BloqueReserva />
+</Layout>
+
+<style>
+  .cabecera-pagina { padding-bottom: clamp(32px, 5vw, 64px); }
+  .eventos { padding-bottom: clamp(56px, 9vw, 120px); }
+  .eventos__grid { display: grid; grid-template-columns: 1fr; gap: clamp(36px, 5vw, 56px) clamp(16px, 2.5vw, 32px); }
+  .momentos { display: grid; gap: clamp(32px, 5vw, 56px); padding-bottom: clamp(56px, 9vw, 120px); }
+  .momentos__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(10px, 2vw, 24px); }
+  @media (min-width: 900px) { .momentos__grid { grid-template-columns: repeat(4, 1fr); } }
+  .evento { display: grid; gap: 0.6rem; align-content: start; }
+  .evento h3 { margin: 0.6rem 0 0; font-weight: 100; font-size: clamp(1.75rem, 1.3rem + 1.2vw, 2.25rem); line-height: 1.1; }
+  .evento p { margin: 0 0 0.6rem; color: var(--texto-suave); }
+
+  @media (min-width: 600px) { .eventos__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .eventos__grid { grid-template-columns: repeat(4, 1fr); } }
+</style>

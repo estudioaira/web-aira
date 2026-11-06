@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "./Encabezado.astro";
+import legales from "../datos/legales.json";
+const { clave } = Astro.props;
+const d = legales[clave];
+---
+<Layout titulo={d.meta.titulo} descripcion={d.meta.descripcion} sinPopup>
+  <section class="seccion legal">
+    <div class="contenedor legal__in">
+      <Encabezado nivel={1} titulo={d.titulo} />
+      {d.aviso && <p class="legal__aviso">{d.aviso}</p>}
+      {d.secciones.map((s) => (
+        <section class="legal__sec">
+          <h2>{s.titulo}</h2>
+          <p>{s.texto}</p>
+        </section>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal__in { display: grid; gap: 2rem; max-width: 760px; }
+  .legal__aviso { margin: 0; padding: 1.25rem 1.5rem; border: 1px solid var(--espresso); }
+  .legal__sec { display: grid; gap: 0.5rem; padding-top: 1.5rem; border-top: 1px solid var(--linea); }
+  .legal__sec h2 { margin: 0; font-weight: 100; font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem); line-height: 1.15; }
+  .legal__sec p { margin: 0; color: var(--texto-suave); }
+</style>

@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.astro/
+insumos/
+*.log
+.superpowers/
+public/_banco.html
+
+# Documentación y asistente: viven solo en el computador de la dueña, no se suben a git.
+AGENTS.md
+CLAUDE.md
+TUTORIAL.md
+MANUAL.md
+PENDIENTES.md
+PRODUCT.md
+DESIGN.md
+conocimiento_generado/
+instalar.ps1
+instalar.sh
+doctor.ps1
+doctor.sh

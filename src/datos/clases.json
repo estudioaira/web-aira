@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "titulo": "Celebra en Aira, The Pilates House",
+    "descripcion": "Celebra cumpleaños, despedidas de soltera, grados y eventos empresariales en Aira, The Pilates House, un estudio de pilates reformer en Envigado."
+  },
+  "encabezado": {
+    "etiqueta": "Experiencias",
+    "titulo": "Celebra\nen Aira",
+    "texto": "Haz de tu próxima celebración o encuentro una experiencia distinta, en movimiento y con calma."
+  },
+  "eventos": {
+    "items": [
+      {
+        "titulo": "Cumpleaños",
+        "texto": "Un plan distinto para celebrar: movimiento, compañía y calma.",
+        "imagen": "celebra-globos",
+        "alt": "Sala de reformers de Aira decorada con globos blancos para una celebración",
+        "mensaje": "Hola Aira, quiero información para celebrar un cumpleaños."
+      },
+      {
+        "titulo": "Despedidas de soltera",
+        "texto": "Una despedida diferente, para compartir con tus personas más cercanas.",
+        "imagen": "celebra-despedida",
+        "alt": "Cinco amigas con ropa deportiva rosa y crema se toman una foto en la sala de reformers de Aira durante una despedida de soltera",
+        "mensaje": "Hola Aira, quiero información para una despedida de soltera."
+      },
+      {
+        "titulo": "Grados",
+        "texto": "Celebra un logro con una experiencia que se recuerda.",
+        "imagen": "estudio-recepcion",
+        "alt": "Recepción de Aira con el logo en relieve sobre un muro curvo",
+        "mensaje": "Hola Aira, quiero información para celebrar un grado."
+      },
+      {
+        "titulo": "Eventos empresariales",
+        "texto": "Bienestar para tu equipo, en un espacio pensado para desconectarse.",
+        "imagen": "celebra-empresarial",
+        "alt": "Grupo reunido en la sala de reformers de Aira durante un encuentro de bienvenida",
+        "mensaje": "Hola Aira, quiero información para un evento empresarial."
+      }
+    ]
+  },
+  "momentos": {
+    "titulo": "Momentos en Aira",
+    "items": [
+      {
+        "imagen": "momento-veil",
+        "alt": "La novia, con velo, sostiene una torta mientras sus amigas ríen sobre los reformers, entre globos blancos"
+      },
+      {
+        "imagen": "momento-grupo",
+        "alt": "Grupo de amigas sentadas sobre un reformer con una torta, en una despedida de soltera"
+      },
+      {
+        "imagen": "momento-clase",
+        "alt": "Clase de pilates en la sala de Aira decorada con un globo blanco"
+      },
+      {
+        "imagen": "momento-brindis",
+        "alt": "Mesa de brindis con copas, botellas, torta y un cartel de bachelorette party junto a las pelotas de pilates"
+      },
+      {
+        "imagen": "momento-sala",
+        "alt": "Sala de reformers de Aira con un globo blanco atado con un lazo vino"
+      },
+      {
+        "imagen": "momento-flores",
+        "alt": "Cartel de bachelorette party junto a un florero con claveles y una torta"
+      },
+      {
+        "imagen": "momento-flor",
+        "alt": "Una mano sostiene un clavel rosado envuelto en papel, detalle del Día de la mujer"
+      },
+      {
+        "imagen": "momento-regalo",
+        "alt": "Toalla con el logo de Aira y un clavel envuelto, detalle de regalo del Día de la mujer"
+      }
+    ]
+  }
+}

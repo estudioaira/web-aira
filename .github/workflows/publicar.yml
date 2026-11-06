@@ -1,0 +1,59 @@
+# Publica el sitio en GitHub Pages cuando la revisión pasa.
+#
+# El sitio se compila aquí, en la nube. Nadie compila en su computador para publicar: el
+# asistente edita los textos, sube el cambio y el sitio se actualiza solo.
+#
+# Dirección del sitio: se define con dos variables del repositorio
+# (Settings → Secrets and variables → Actions → Variables):
+#   PUBLIC_SITE = https://el-dominio-del-cliente.com
+#   PUBLIC_BASE = /
+# Si no existen, se publica en https://<cuenta>.github.io/<repositorio>/ (útil para probar).
+name: Publicar
+
+on:
+  workflow_run:
+    workflows: [Revisar]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  compilar:
+    # Solo publica si la revisión pasó.
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Compilar para la dirección definitiva
+        env:
+          PUBLIC_BASE: ${{ vars.PUBLIC_BASE || format('/{0}', github.event.repository.name) }}
+          PUBLIC_SITE: ${{ vars.PUBLIC_SITE || format('https://{0}.github.io', github.repository_owner) }}
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    needs: compilar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

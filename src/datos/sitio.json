@@ -1,0 +1,159 @@
+{
+  "nombre": "Aira",
+  "marca": "The Pilates House",
+  "eslogan": "One breath at a time",
+  "descripcion": "Aira, The Pilates House en Envigado, Antioquia. Pilates reformer semipersonalizado con profesores fisioterapeutas. Agenda tu primera clase de prueba.",
+  "indexar": true,
+  "empresa": {
+    "tipo": "Persona natural",
+    "titular": "Yésica Vidal"
+  },
+  "contacto": {
+    "whatsapp": "573127410343",
+    "whatsappVisible": "+57 312 741 0343",
+    "mensajeReserva": "Hola! Quiero info de Aíra The Pilates House",
+    "horario": [
+      {
+        "dias": "Lunes a viernes",
+        "horas": "6:30 a. m. a 11:30 a. m. y 4:00 p. m. a 7:00 p. m."
+      },
+      {
+        "dias": "Sábados",
+        "horas": "7:00 a. m. a 12:00 m."
+      },
+      {
+        "dias": "Domingos y festivos",
+        "horas": "Sin clases"
+      }
+    ],
+    "redes": [
+      {
+        "nombre": "Instagram",
+        "usuario": "@aira_thepilateshouse",
+        "href": "https://www.instagram.com/aira_thepilateshouse/"
+      }
+    ],
+    "correo": "estudioaira222@gmail.com"
+  },
+  "menu": [
+    {
+      "id": "inicio",
+      "texto": "Inicio",
+      "href": "/"
+    },
+    {
+      "id": "la-casa",
+      "texto": "El estudio",
+      "href": "/la-casa"
+    },
+    {
+      "id": "clases",
+      "texto": "Experiencias",
+      "href": "/clases"
+    },
+    {
+      "id": "membresia",
+      "texto": "Planes y horarios",
+      "href": "/membresia"
+    },
+    {
+      "id": "contacto",
+      "texto": "Contacto",
+      "href": "/contacto"
+    }
+  ],
+  "legales": [
+    {
+      "texto": "Política de privacidad",
+      "href": "/politica-privacidad"
+    },
+    {
+      "texto": "Tratamiento de datos",
+      "href": "/tratamiento-datos"
+    },
+    {
+      "texto": "Política de cookies",
+      "href": "/politica-cookies"
+    }
+  ],
+  "ui": {
+    "irAlContenido": "Ir al contenido",
+    "abrirMenu": "Abrir menú",
+    "cerrarMenu": "Cerrar menú",
+    "menuPrincipal": "Menú principal",
+    "menuMovil": "Menú",
+    "irInicio": "ir al inicio",
+    "reservar": "Reservar",
+    "reservarWa": "Reservar por WhatsApp",
+    "escribirWa": "Escribir por WhatsApp",
+    "volverArriba": "Volver arriba",
+    "abreNuevaPestana": "se abre en una pestaña nueva",
+    "consultarPlan": "Comprar en la app",
+    "cotizar": "Consultar por WhatsApp",
+    "comoLlegar": "Cómo llegar",
+    "verPlanes": "Ver todos los planes en la app",
+    "mapaTitulo": "Mapa con la ubicación de Aira, The Pilates House en el Mall Le Mont"
+  },
+  "pie": {
+    "explorar": "Explorar",
+    "visitanos": "Visítanos",
+    "conecta": "Conecta",
+    "legal": "Legal",
+    "creditos": {
+      "texto": "Sitio web desarrollado por",
+      "nombre": "emp2web",
+      "url": "https://emp2web.com/web-express/"
+    }
+  },
+  "noEncontrada": {
+    "titulo": "Esta página\nse fue a respirar",
+    "texto": "No encontramos lo que buscas. Vuelve al inicio y sigue el recorrido.",
+    "boton": "Volver al inicio"
+  },
+  "ubicacion": {
+    "nombre": "Mall Le Mont",
+    "detalle": "Sótano 2, oficina 9855",
+    "linea": "Av. Las Palmas #Km 15 990",
+    "zona": "Vda. El Peñasco",
+    "ciudad": "Envigado, Antioquia",
+    "completa": "Mall Le Mont, Sótano 2, oficina 9855, Av. Las Palmas #Km 15 990, Vda. El Peñasco, Envigado, Antioquia",
+    "mapaEnlace": "https://maps.app.goo.gl/wGL6qefMAmVo1nvF9",
+    "mapaEmbed": "https://maps.google.com/maps?q=Mall+Le+Mont+Envigado+Antioquia&z=16&hl=es&output=embed"
+  },
+  "app": {
+    "url": "https://aira.kalmiapp.com/booking",
+    "precios": "https://aira.kalmiapp.com/precios"
+  },
+  "cta": {
+    "texto": "Clase de prueba",
+    "corto": "Clase de prueba"
+  },
+  "reservas": {
+    "titulo": "Reserva tu clase a través de nuestra app",
+    "texto": "Elige tu horario y confirma tu cupo en la app. Si tienes dudas, escríbenos por WhatsApp.",
+    "botonApp": "Reservar en la app",
+    "botonDudas": "¿Dudas? Escríbenos por WhatsApp",
+    "mensajeDudas": "Hola Aira, tengo una duda sobre las clases."
+  },
+  "pruebaGratis": {
+    "titulo": "Agenda tu primera clase de prueba",
+    "texto": "Reserva en la app y ven a conocer Aira.",
+    "boton": "Agenda tu clase de prueba",
+    "dudas": "¿Dudas? Escríbenos por WhatsApp"
+  },
+  "popup": {
+    "segundos": 30,
+    "titulo": "Agenda tu primera clase de prueba",
+    "texto": "Ven a conocer Aira: clases semipersonalizadas de hasta 6 personas, con profesores fisioterapeutas.",
+    "boton": "Agendar en la app",
+    "cerrar": "Ahora no",
+    "cerrarAria": "Cerrar ventana",
+    "etiquetaAria": "Primera clase de prueba"
+  },
+  "cookies": {
+    "etiquetaAria": "Aviso de cookies",
+    "texto": "Este sitio no usa cookies de seguimiento ni publicidad. El mapa del pie de página es de Google Maps y puede guardar cookies propias.",
+    "enlace": "Leer la política de cookies",
+    "boton": "Entendido"
+  }
+}

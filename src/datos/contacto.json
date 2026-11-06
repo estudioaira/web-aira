@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "titulo": "Contacto y reservas en Aira, The Pilates House",
+    "descripcion": "Reserva tu clase en Aira a través de nuestra app o escríbenos. Encuentra la dirección en Envigado, el formulario de contacto y las preguntas frecuentes."
+  },
+  "encabezado": {
+    "etiqueta": "Contacto",
+    "titulo": "Reservas\ny contacto",
+    "texto": "Reserva en la app y escríbenos si tienes dudas."
+  },
+  "formulario": {
+    "titulo": "Escríbenos",
+    "texto": "Déjanos tus datos y te respondemos por WhatsApp.",
+    "campos": {
+      "nombre": "Nombre",
+      "telefono": "Teléfono",
+      "correo": "Correo (opcional)",
+      "motivo": "¿Qué te interesa?",
+      "mensaje": "Mensaje (opcional)",
+      "elegir": "Elige una opción"
+    },
+    "motivos": [
+      "Clase de prueba",
+      "Planes y horarios",
+      "Cumpleaños y eventos",
+      "Otro"
+    ],
+    "consentimiento": "Acepto la política de tratamiento de datos",
+    "consentimientoEnlace": "Leer la política",
+    "boton": "Enviar por WhatsApp",
+    "error": "Revisa los campos marcados.",
+    "aviso": "Al enviar, se abre WhatsApp con tu mensaje listo para mandar.",
+    "sinJs": "Para usar el formulario activa JavaScript, o escríbenos directamente por WhatsApp.",
+    "plantilla": "Hola Aira, soy {nombre}.\nMotivo: {motivo}\nTeléfono: {telefono}\nCorreo: {correo}\n{mensaje}"
+  },
+  "visita": {
+    "titulo": "Visítanos",
+    "etiquetas": {
+      "direccion": "Dirección",
+      "horario": "Horario del estudio",
+      "correo": "Correo",
+      "redes": "Redes"
+    }
+  },
+  "mapa": {
+    "titulo": "Cómo llegar",
+    "alt": "Recepción de Aira con el logo en relieve sobre un muro curvo"
+  },
+  "faq": {
+    "titulo": "Antes de tu primera visita",
+    "items": [
+      {
+        "pregunta": "¿Cómo agendo mi clase?",
+        "respuesta": "Siempre a través de nuestra app. Si tienes dudas, escríbenos por WhatsApp."
+      },
+      {
+        "pregunta": "¿Qué debo llevar?",
+        "respuesta": "Un termo con agua. Los accesorios y lo demás los pone Aira."
+      },
+      {
+        "pregunta": "¿Cuántas personas hay por clase?",
+        "respuesta": "Hasta 6 personas por clase."
+      },
+      {
+        "pregunta": "¿Dónde están ubicados?",
+        "respuesta": "{direccion}"
+      }
+    ]
+  }
+}

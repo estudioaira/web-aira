@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "titulo": "El estudio de Aira, The Pilates House",
+    "descripcion": "Conoce el estudio de Aira en Envigado: recepción, salas con lockers, reformers y zonas verdes, pensados para entrenar con calma y en grupos pequeños."
+  },
+  "encabezado": {
+    "etiqueta": "El estudio",
+    "titulo": "Un refugio\nde calma",
+    "texto": "Recepción, salas, reformers y zonas verdes, pensados para entrenar con calma."
+  },
+  "espacios": {
+    "titulo": "Los espacios",
+    "items": [
+      {
+        "nombre": "Recepción",
+        "imagen": "estudio-recepcion",
+        "alt": "Recepción de Aira: muro curvo blanco con el logo en relieve y mostrador color arena"
+      },
+      {
+        "nombre": "Salas con lockers",
+        "imagen": "estudio-toallas",
+        "alt": "Sala con casilleros y estación de devolución de toallas"
+      },
+      {
+        "nombre": "Reformers",
+        "imagen": "estudio-sala",
+        "alt": "Sala principal con reformers alineados bajo una línea de luz cálida"
+      },
+      {
+        "nombre": "Zonas verdes",
+        "imagen": "estudio-zonas-verdes",
+        "alt": "Clase al aire libre sobre el césped, con tapetes blancos y el bosque al fondo"
+      },
+      {
+        "nombre": "Nichos",
+        "imagen": "estudio-nichos",
+        "alt": "Nichos en arco iluminados junto a la recepción"
+      },
+      {
+        "nombre": "Pelotas",
+        "imagen": "estudio-pelotas",
+        "alt": "Esferas de pilates color crema apiladas junto a un reformer"
+      },
+      {
+        "nombre": "Sala con cortinas",
+        "imagen": "estudio-cortinas",
+        "alt": "Hilera de reformers frente a cortinas translúcidas, con plantas a los lados"
+      },
+      {
+        "nombre": "Casilleros",
+        "imagen": "estudio-lockers",
+        "alt": "Casilleros y repisas en madera clara con toallas dobladas"
+      },
+      {
+        "nombre": "Arco de luz",
+        "imagen": "estudio-reformers-logo",
+        "alt": "Reformer bajo un arco de luz con el logo de Aira dentro de un círculo iluminado"
+      }
+    ]
+  }
+}

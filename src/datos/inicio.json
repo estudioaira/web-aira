@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "titulo": "Aira, The Pilates House: serenidad en movimiento",
+    "descripcion": "Pilates reformer semipersonalizado en Envigado, con grupos de hasta 6 personas y profesores fisioterapeutas. Agenda tu primera clase de prueba en Aira."
+  },
+  "portada": {
+    "etiqueta": "The Pilates House",
+    "titulo": "Serenidad\nen movimiento",
+    "texto": "Clases de pilates reformer semipersonalizadas, de hasta 6 personas y con profesores fisioterapeutas, en un refugio de calma.",
+    "botones": [
+      {
+        "texto": "Agenda tu clase de prueba",
+        "tipo": "app",
+        "variante": "solido"
+      },
+      {
+        "texto": "Conocer el estudio",
+        "href": "/la-casa",
+        "variante": "contorno"
+      }
+    ],
+    "imagen": "estudio-recepcion",
+    "alt": "Recepción de Aira: muro curvo blanco con el logo en relieve, mostrador color arena y una planta en maceta de cerámica"
+  },
+  "filosofia": {
+    "etiqueta": "Nuestro propósito",
+    "texto": "Propiciar la serenidad mental, el balance físico y espiritual mediante una experiencia sensorial consciente."
+  },
+  "cita": {
+    "texto": "Creemos en la simplicidad que habla, en la experiencia sensorial que trasciende lo físico."
+  },
+  "experiencias": {
+    "titulo": "Una clase pensada para ti",
+    "texto": "Clases semipersonalizadas: pocas personas, atención cercana y una técnica que se guía paso a paso.",
+    "items": [
+      {
+        "titulo": "Pilates reformer",
+        "texto": "Trabajo en máquina con técnica precisa, para fuerza, postura y control."
+      },
+      {
+        "titulo": "Hasta 6 personas por clase",
+        "texto": "Grupos pequeños: clases semipersonalizadas con atención cercana."
+      },
+      {
+        "titulo": "Profesores fisioterapeutas",
+        "texto": "Te acompaña un equipo formado en el movimiento del cuerpo."
+      },
+      {
+        "titulo": "Técnica guiada",
+        "texto": "Te corregimos y acompañamos en cada ejercicio."
+      }
+    ],
+    "enlace": {
+      "texto": "Ver las experiencias",
+      "href": "/clases"
+    }
+  },
+  "estudio": {
+    "puntos": [
+      {
+        "titulo": "Luz y silencio",
+        "texto": "Un ambiente controlado para concentrarte en tu cuerpo."
+      },
+      {
+        "titulo": "Hasta 6 personas por clase",
+        "texto": "Pocas personas y la mirada atenta del profesor."
+      },
+      {
+        "titulo": "Cada detalle cuenta",
+        "texto": "Espacios, equipos y acabados cuidados para que te sientas bien."
+      }
+    ],
+    "enlace": {
+      "texto": "Conocer el estudio",
+      "href": "/la-casa"
+    },
+    "imagen": "estudio-sala",
+    "alt": "Sala principal con reformers alineados bajo una línea de luz cálida",
+    "etiquetaSeccion": "El estudio"
+  }
+}

@@ -1,0 +1,107 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "../components/Encabezado.astro";
+import PlanMembresia from "../components/PlanMembresia.astro";
+import Boton from "../components/Boton.astro";
+import Foto from "../components/Foto.astro";
+import BloqueReserva from "../components/BloqueReserva.astro";
+import d from "../datos/membresia.json";
+import sitio from "../datos/sitio.json";
+import { enlaceWa } from "../lib/wa.js";
+---
+<Layout titulo={d.meta.titulo} descripcion={d.meta.descripcion} activa="membresia">
+  <section class="seccion cabecera-pagina">
+    <div class="contenedor"><Encabezado nivel={1} etiqueta={d.encabezado.etiqueta} titulo={d.encabezado.titulo} texto={d.encabezado.texto} alinear="centro" /></div>
+  </section>
+
+  <section class="contenedor horarios">
+    <Encabezado titulo={d.horarios.titulo} texto={d.horarios.texto} />
+    <dl class="horarios__lista">
+      {d.horarios.dias.map((dia) => (
+        <div class="dia rev">
+          <dt>{dia.dia}</dt>
+          <dd>
+            {dia.franjas.length === 0 && <span class="dia__cerrado">{d.horarios.cerrado}</span>}
+            {dia.franjas.map((f) => (
+              <div class="franja">
+                <span class="franja__et">{f.etiqueta}</span>
+                <ul>{f.horas.map((h) => <li>{h}</li>)}</ul>
+              </div>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="seccion planes">
+    <div class="contenedor">
+      <Encabezado titulo={d.planes.titulo} alinear="centro" />
+      <div class="planes__grid" data-stagger>
+        {d.planes.items.map((p) => <div class="rev"><PlanMembresia plan={p} moneda={d.planes.moneda} textos={d.planes} /></div>)}
+      </div>
+      <p class="nota rev">{d.planes.nota}</p>
+      <div class="rev planes__ver"><Boton texto={sitio.ui.verPlanes} href={sitio.app.precios} variante="contorno" externo /></div>
+    </div>
+  </section>
+
+  <section class="contenedor reglas">
+    <Encabezado titulo={d.reglas.titulo} texto={d.reglas.texto} />
+    <ol class="reglas__lista">
+      {d.reglas.items.map((r) => <li class="rev">{r}</li>)}
+    </ol>
+  </section>
+
+  <section class="seccion gift">
+    <div class="contenedor gift__in">
+      <div class="gift__foto rev">
+        <Foto base={d.gift.imagen} alt={d.gift.alt} anchos={[800, 1200, 1800]} natural="8 / 5" sizes="(min-width: 900px) 50vw, 92vw" clase="gift__img" />
+      </div>
+      <div class="gift__texto">
+        <Encabezado titulo={d.gift.titulo} texto={d.gift.texto} />
+        <div class="rev"><Boton texto={d.gift.boton} href={enlaceWa(sitio.contacto.whatsapp, d.gift.mensaje)} variante="contorno" externo /></div>
+      </div>
+    </div>
+  </section>
+
+  <BloqueReserva />
+</Layout>
+
+<style>
+  .cabecera-pagina { padding-bottom: clamp(32px, 5vw, 64px); }
+  .horarios { display: grid; gap: 2.5rem; padding-bottom: clamp(48px, 8vw, 110px); }
+  .horarios__lista { margin: 0; display: grid; gap: 0; }
+  .dia { display: grid; gap: 0.75rem; padding-block: 1.4rem; border-top: 1px solid var(--linea); }
+  .dia:last-child { border-bottom: 1px solid var(--linea); }
+  .dia dt { font-weight: 100; font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height: 1.15; }
+  .dia dd { margin: 0; }
+  .dia dd { display: grid; gap: 1rem; }
+  .dia__cerrado { color: var(--texto-suave); }
+  .franja { display: grid; gap: 0.6rem; }
+  .franja__et { font-family: var(--font-etiqueta); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texto-suave); }
+  .dia ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem 0.75rem; }
+  .dia li { border: 1px solid var(--espresso); padding: 0.5rem 1rem; }
+
+  .planes__grid { display: grid; gap: 1.5rem; margin-top: clamp(40px, 6vw, 80px); align-items: stretch; }
+  .planes__ver { display: flex; justify-content: center; margin-top: 2rem; }
+  .planes__grid > div { display: grid; }
+  .nota { margin: 2.5rem auto 0; max-width: 60ch; text-align: center; color: var(--texto-suave); font-size: 0.9rem; }
+
+  .reglas { display: grid; gap: 2rem; padding-bottom: clamp(48px, 8vw, 110px); }
+  .reglas__lista { margin: 0; padding: 0; list-style: none; counter-reset: regla; display: grid; gap: 0; }
+  .reglas__lista li { counter-increment: regla; display: grid; grid-template-columns: 2.5rem 1fr; gap: 0.5rem; padding-block: 1rem; border-top: 1px solid var(--linea); color: var(--texto-suave); }
+  .reglas__lista li:last-child { border-bottom: 1px solid var(--linea); }
+  .reglas__lista li::before { content: counter(regla, decimal-leading-zero); font-family: var(--font-etiqueta); font-size: 0.78rem; letter-spacing: 0.18em; padding-top: 0.2rem; color: var(--espresso); }
+
+  .gift { padding-block: clamp(56px, 9vw, 120px); }
+  .gift__in { display: grid; gap: 2.5rem; align-items: center; }
+  .gift__img { width: 100%; height: auto; display: block; box-shadow: 0 0 0 1px var(--linea); }
+  .gift__texto { display: grid; gap: 1.5rem; justify-items: start; }
+
+  @media (min-width: 1100px) { .planes__grid { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 900px) {
+    .dia { grid-template-columns: 0.4fr 1fr; align-items: center; gap: 2rem; }
+    .planes__grid { grid-template-columns: repeat(2, 1fr); }
+    .gift__in { grid-template-columns: 1.1fr 0.9fr; gap: 6vw; }
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "../components/Encabezado.astro";
+import Boton from "../components/Boton.astro";
+import sitio from "../datos/sitio.json";
+import { ruta } from "../lib/ruta.js";
+const n = sitio.noEncontrada;
+---
+<Layout titulo={`${n.titulo.replace("\n", " ")} · ${sitio.nombre}`} descripcion={sitio.descripcion}>
+  <section class="seccion">
+    <div class="contenedor nf">
+      <Encabezado nivel={1} titulo={n.titulo} texto={n.texto} alinear="centro" />
+      <Boton texto={n.boton} href={ruta("/")} variante="solido" />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .nf { display: grid; gap: 2.5rem; justify-items: center; text-align: center; min-height: 55svh; align-content: center; }
+</style>

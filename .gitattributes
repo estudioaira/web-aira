@@ -1,0 +1,17 @@
+# El cliente trabaja en Windows; nosotros, en Linux. Sin esto, Git en Windows
+# puede convertir los saltos de línea (LF -> CRLF) al bajar el repositorio, y
+# algunas herramientas de Python y Node se quejan con eso o marcan el archivo
+# entero como "cambiado" sin que nadie haya tocado una línea.
+#
+# Todo el texto se normaliza a LF, siempre, sin importar el sistema operativo.
+* text=auto eol=lf
+
+# Binarios: nunca tocar. Declararlos explícito evita que Git intente
+# "arreglarles" los saltos de línea, que los corrompería.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.svg binary
+*.woff2 binary
+*.ico binary

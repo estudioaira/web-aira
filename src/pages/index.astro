@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Portada from "../components/Portada.astro";
+import Cita from "../components/Cita.astro";
+import Encabezado from "../components/Encabezado.astro";
+import Separador from "../components/Separador.astro";
+import Foto from "../components/Foto.astro";
+import Recuadro from "../components/Recuadro.astro";
+import Boton from "../components/Boton.astro";
+import PruebaGratis from "../components/PruebaGratis.astro";
+import inicio from "../datos/inicio.json";
+import sitio from "../datos/sitio.json";
+import { ruta } from "../lib/ruta.js";
+---
+<Layout titulo={inicio.meta.titulo} descripcion={inicio.meta.descripcion} activa="inicio">
+  <Portada datos={inicio.portada} appUrl={sitio.app.url} />
+
+  <section class="seccion filosofia">
+    <div class="contenedor filosofia__in">
+      <Separador />
+      <p class="filosofia__texto rev" style="--i:1">{inicio.filosofia.texto}</p>
+    </div>
+  </section>
+
+  <section class="seccion experiencias">
+    <div class="contenedor">
+      <Encabezado titulo={inicio.experiencias.titulo} texto={inicio.experiencias.texto} alinear="centro" />
+      <ul class="atributos" data-stagger>
+        {inicio.experiencias.items.map((i) => (
+          <li class="atributo rev">
+            <h3>{i.titulo}</h3>
+            <p>{i.texto}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="experiencias__enlace rev"><a href={ruta(inicio.experiencias.enlace.href)}>{inicio.experiencias.enlace.texto}</a></p>
+    </div>
+  </section>
+
+  <section class="estudio banda">
+    <div class="contenedor estudio__in">
+      <div class="estudio__texto">
+        <h2 class="sr-only">{inicio.estudio.etiquetaSeccion}</h2>
+        <ul class="puntos">
+          {inicio.estudio.puntos.map((p) => (
+            <li class="rev"><h3>{p.titulo}</h3><p>{p.texto}</p></li>
+          ))}
+        </ul>
+        <div class="rev"><Boton texto={inicio.estudio.enlace.texto} href={ruta(inicio.estudio.enlace.href)} variante="marfil-contorno" /></div>
+      </div>
+      <div class="estudio__foto rev">
+        <Recuadro ratio="1 / 1"><Foto base={inicio.estudio.imagen} alt={inicio.estudio.alt} sizes="(min-width: 900px) 40vw, 92vw" /></Recuadro>
+      </div>
+    </div>
+  </section>
+
+  <Cita texto={inicio.cita.texto} />
+  <PruebaGratis />
+</Layout>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .filosofia__in { display: grid; gap: 1.5rem; justify-items: center; text-align: center; }
+  .filosofia__texto { margin: 0; max-width: 26ch; font-weight: 100; font-size: clamp(1.9rem, 1rem + 3.6vw, 3.5rem); line-height: 1.18; overflow-wrap: break-word; }
+
+  .atributos { list-style: none; margin: clamp(40px, 6vw, 80px) 0 0; padding: 0; display: grid; gap: 2rem; }
+  .atributo { display: grid; gap: 0.6rem; padding-top: 1.5rem; border-top: 1px solid var(--espresso); align-content: start; }
+  .atributo h3 { margin: 0; font-weight: 100; font-size: clamp(1.75rem, 1.3rem + 1.2vw, 2.25rem); line-height: 1.12; }
+  .atributo p { margin: 0; color: var(--texto-suave); max-width: 30ch; }
+  .experiencias__enlace { margin: clamp(32px, 5vw, 56px) 0 0; text-align: center; }
+  .experiencias__enlace a { font-family: var(--font-etiqueta); font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding-bottom: 4px; border-bottom: 1px solid var(--espresso); }
+
+  .estudio { padding-block: clamp(64px, 9vw, 140px); }
+  .estudio__in { display: grid; gap: 3rem; align-items: center; }
+  .estudio__texto { display: grid; gap: 2rem; justify-items: start; }
+  .puntos { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; width: 100%; }
+  .puntos li { display: grid; gap: 0.25rem; padding-block: 1.1rem; border-top: 1px solid rgba(246, 245, 227, 0.32); }
+  .puntos li:last-child { border-bottom: 1px solid rgba(246, 245, 227, 0.32); }
+  .puntos h3 { margin: 0; font-weight: 100; font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem); line-height: 1.15; }
+  .puntos p { margin: 0; }
+
+
+  @media (min-width: 900px) {
+    .atributos { grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+    .estudio__in { grid-template-columns: 1.05fr 0.95fr; gap: 7vw; }
+    }
+</style>

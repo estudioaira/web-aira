@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "../components/Encabezado.astro";
+import Separador from "../components/Separador.astro";
+import Foto from "../components/Foto.astro";
+import Recuadro from "../components/Recuadro.astro";
+import BloqueReserva from "../components/BloqueReserva.astro";
+import d from "../datos/la-casa.json";
+---
+<Layout titulo={d.meta.titulo} descripcion={d.meta.descripcion} activa="la-casa">
+  <section class="seccion cabecera-pagina">
+    <div class="contenedor"><Encabezado nivel={1} etiqueta={d.encabezado.etiqueta} titulo={d.encabezado.titulo} texto={d.encabezado.texto} alinear="centro" /></div>
+  </section>
+
+  <section class="isotipo"><div class="contenedor isotipo__in"><Separador /></div></section>
+
+  <section class="seccion espacios" style="padding-top:0">
+    <div class="contenedor">
+      <h2 class="sr-only">{d.espacios.titulo}</h2>
+      <div class="espacios__grid">
+        {d.espacios.items.map((e) => (
+          <article class="espacio rev">
+            <Recuadro ratio="1 / 1"><Foto base={e.imagen} alt={e.alt} sizes="(min-width: 1000px) 24vw, (min-width: 600px) 45vw, 92vw" /></Recuadro>
+            <h3>{e.nombre}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BloqueReserva />
+</Layout>
+
+<style>
+  .cabecera-pagina { padding-bottom: clamp(32px, 5vw, 64px); }
+  .isotipo__in { padding-block: clamp(8px, 2vw, 24px) clamp(40px, 6vw, 72px); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .espacios__grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px, 5vw, 48px) clamp(16px, 2.5vw, 32px); }
+  .espacio { display: grid; gap: 0.6rem; align-content: start; }
+  .espacio h3 { margin: 0.6rem 0 0; font-weight: 100; font-size: clamp(1.75rem, 1.3rem + 1.2vw, 2.25rem); line-height: 1.1; }
+
+  @media (min-width: 600px) { .espacios__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .espacios__grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

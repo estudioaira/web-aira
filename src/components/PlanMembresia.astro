@@ -1,0 +1,28 @@
+---
+import Boton from "./Boton.astro";
+import sitio from "../datos/sitio.json";
+const { plan, moneda, textos } = Astro.props;
+const fmt = (n) => "$" + new Intl.NumberFormat("es-CO").format(n);
+---
+<article class="plan">
+  <h3 class="plan__nombre">{plan.nombre}</h3>
+  <p class="plan__precio"><span>{fmt(plan.precio)}</span> <small>{moneda}</small></p>
+  <p class="plan__detalle">{plan.porClase ? `${fmt(plan.porClase)} ${textos.porClase}` : "\u00a0"}</p>
+  <ul>
+    <li>{textos.vigencia}: {plan.vigencia}</li>
+    {plan.compartido && <li>{textos.compartidoEtiqueta}</li>}
+  </ul>
+  <Boton texto={sitio.ui.consultarPlan} href={sitio.app.precios} variante="contorno" externo />
+</article>
+
+<style>
+  .plan { display: grid; gap: 1rem; align-content: start; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--linea); background: transparent; }
+  .plan__nombre { margin: 0; text-align: center; font-weight: 100; font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem); line-height: 1.08; }
+  .plan__precio { margin: 0.25rem 0 0; text-align: center; }
+  .plan__precio span { display: block; font-weight: 100; font-size: clamp(2rem, 1.5rem + 1.6vw, 2.5rem); line-height: 1.1; }
+  .plan__precio small { font-family: var(--font-etiqueta); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .plan__detalle { margin: 0; text-align: center; color: var(--texto-suave); min-height: 1.5em; }
+  ul { list-style: none; margin: 0 0 0.5rem; padding: 1.1rem 0 0; border-top: 1px solid var(--linea); display: grid; gap: 0.5rem; align-content: start; min-height: 5.2rem; }
+  li::before { content: ""; display: inline-block; width: 14px; height: 1px; background: currentColor; margin-right: 0.7rem; vertical-align: middle; opacity: 0.7; }
+  .plan :global(.boton) { justify-self: stretch; align-self: end; }
+</style>

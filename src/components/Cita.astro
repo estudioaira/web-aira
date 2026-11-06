@@ -1,0 +1,18 @@
+---
+import { ruta } from "../lib/ruta.js";
+const { texto, firma } = Astro.props;
+---
+<section class="cita banda">
+  <div class="contenedor cita__in">
+    <img class="rev" src={ruta("/brand/isotipo-marfil.png")} alt="" width="64" height="16" loading="lazy" />
+    <blockquote class="rev" style="--i:1">{texto}</blockquote>
+    {firma && <p class="etiqueta rev" style="--i:2">{firma}</p>}
+  </div>
+</section>
+
+<style>
+  .cita { padding-block: clamp(80px, 12vw, 180px); }
+  .cita__in { display: grid; gap: 2rem; justify-items: center; text-align: center; }
+  .cita img { width: 64px; height: auto; }
+  blockquote { margin: 0; max-width: 24ch; font-weight: 100; font-size: clamp(1.9rem, 1rem + 4vw, 3.75rem); line-height: 1.15; overflow-wrap: break-word; }
+</style>

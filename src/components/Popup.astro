@@ -1,0 +1,73 @@
+---
+import Boton from "./Boton.astro";
+import Foto from "./Foto.astro";
+import Recuadro from "./Recuadro.astro";
+import sitio from "../datos/sitio.json";
+const p = sitio.popup;
+---
+<dialog class="popup" id="popup" data-segundos={p.segundos} aria-labelledby="popupTitulo">
+  <div class="popup__in">
+    <div class="popup__foto"><Recuadro ratio="1 / 1"><Foto base="estudio-recepcion" alt="" sizes="(min-width: 700px) 280px, 0px" /></Recuadro></div>
+    <div class="popup__texto">
+      <button class="popup__x" type="button" data-cerrar aria-label={p.cerrarAria}>&times;</button>
+      <h2 class="popup__titulo" id="popupTitulo">{p.titulo}</h2>
+      <p class="popup__p">{p.texto}</p>
+      <div class="popup__acciones">
+        <Boton texto={p.boton} href={sitio.app.url} variante="marfil" externo clase="popup__app" />
+        <button class="popup__no" type="button" data-cerrar>{p.cerrar}</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { programarPopup, CLAVE_POPUP } from "../lib/popup.js";
+
+  const d = document.getElementById("popup") as HTMLDialogElement | null;
+  if (d && typeof d.showModal === "function") {
+    const guardar = () => { try { sessionStorage.setItem(CLAVE_POPUP, "1"); } catch {} };
+    let descartado = false;
+    try { descartado = sessionStorage.getItem(CLAVE_POPUP) === "1"; } catch {}
+
+    const cerrar = () => { guardar(); if (d.open) d.close(); };
+    d.querySelectorAll("[data-cerrar]").forEach((b) => b.addEventListener("click", cerrar));
+    d.querySelector("a")?.addEventListener("click", guardar);
+    d.addEventListener("cancel", guardar); // tecla Esc
+    d.addEventListener("click", (e) => { if (e.target === d) cerrar(); }); // clic en el fondo
+
+    const escribiendo = () => {
+      const a = document.activeElement;
+      return !!a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName);
+    };
+    const mostrar = () => {
+      if (d.open || document.querySelector("dialog[open]")) return;
+      if (escribiendo()) { setTimeout(mostrar, 15000); return; } // no interrumpir a quien escribe
+      d.showModal();
+    };
+    programarPopup({ segundos: Number(d.dataset.segundos), descartado, mostrar });
+  }
+</script>
+
+<style>
+  .popup { border: 0; padding: 0; margin: auto; width: min(760px, calc(100vw - 32px)); max-height: calc(100svh - 32px); background: var(--espresso); color: var(--marfil); border-radius: 0; overflow: auto; }
+  .popup::backdrop { background: rgba(60, 52, 45, 0.62); }
+  .popup[open] { animation: popup-entra 0.7s var(--ease) both; }
+  .popup[open]::backdrop { animation: popup-fondo 0.7s var(--ease) both; }
+  @keyframes popup-entra { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes popup-fondo { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .popup[open], .popup[open]::backdrop { animation: none; } }
+
+  .popup__in { display: grid; }
+  .popup__foto { display: none; }
+  .popup__texto { position: relative; display: grid; gap: 1.25rem; padding: clamp(40px, 7vw, 64px) clamp(24px, 5vw, 48px) clamp(28px, 5vw, 48px); align-content: center; }
+  .popup__x { position: absolute; top: 8px; right: 8px; width: 48px; height: 48px; border: 0; background: none; color: var(--marfil); font-size: 2rem; font-weight: 100; line-height: 1; cursor: pointer; }
+  .popup__titulo { margin: 0; font-weight: 100; font-size: clamp(2.125rem, 1.4rem + 3vw, 3.25rem); line-height: 1.06; text-wrap: balance; }
+  .popup__p { margin: 0; max-width: 34ch; }
+  .popup__acciones { display: grid; gap: 0.75rem; justify-items: start; margin-top: 0.5rem; }
+  .popup__no { background: none; border: 0; padding: 0.75rem 0; color: var(--marfil); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; cursor: pointer; font: inherit; }
+  @media (min-width: 700px) {
+    .popup__in { grid-template-columns: 0.85fr 1.15fr; }
+    .popup__foto { display: block; }
+    .popup__foto :global(.recuadro) { height: 100%; aspect-ratio: auto; min-height: 100%; }
+  }
+</style>

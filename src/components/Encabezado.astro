@@ -1,0 +1,18 @@
+---
+const { etiqueta, titulo, texto, nivel = 2, alinear = "izq", tono = "claro" } = Astro.props;
+const lineas = titulo.split("\n");
+const Titulo = nivel === 1 ? "h1" : "h2";
+---
+<div class:list={["enc", `enc--${alinear}`]}>
+  {etiqueta && <p class="etiqueta rev">{etiqueta}</p>}
+  <Titulo class:list={[nivel === 1 ? "titulo-xl" : "titulo-lg", "rev"]} style="--i:1">
+    {lineas.map((l, i) => <><span class="enc__linea">{l}</span>{i < lineas.length - 1 && <br />}</>)}
+  </Titulo>
+  {texto && <p class="lead rev" style="--i:2">{texto}</p>}
+</div>
+
+<style>
+  .enc { display: grid; gap: 1.25rem; }
+  .enc--centro { justify-items: center; text-align: center; }
+  .enc--centro .lead { margin-inline: auto; }
+</style>

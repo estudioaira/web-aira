@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Encabezado from "../components/Encabezado.astro";
+import Boton from "../components/Boton.astro";
+import Recuadro from "../components/Recuadro.astro";
+import Foto from "../components/Foto.astro";
+import Formulario from "../components/Formulario.astro";
+import BloqueReserva from "../components/BloqueReserva.astro";
+import d from "../datos/contacto.json";
+import sitio from "../datos/sitio.json";
+import { tieneVisita, tieneConecta } from "../lib/visibilidad.js";
+import { preguntas } from "../lib/estructurados.js";
+
+const c = sitio.contacto;
+const u = sitio.ubicacion;
+const redes = (c.redes ?? []).filter((r) => r.href);
+const e = d.visita.etiquetas;
+const faq = d.faq.items.map((q) => ({ ...q, respuesta: q.respuesta.replaceAll("{direccion}", u.completa) }));
+const hayVisita = tieneVisita({ direccion: u, horario: c.horario }) || tieneConecta(c);
+---
+<Layout titulo={d.meta.titulo} descripcion={d.meta.descripcion} activa="contacto" estructurados={[preguntas(faq)]}>
+  <section class="seccion cabecera-pagina">
+    <div class="contenedor"><Encabezado nivel={1} etiqueta={d.encabezado.etiqueta} titulo={d.encabezado.titulo} texto={d.encabezado.texto} alinear="centro" /></div>
+  </section>
+
+  <BloqueReserva />
+
+  <section class="seccion contenedor contacto">
+    <div class="contacto__form rev"><Formulario /></div>
+
+    {hayVisita && (
+    <div class="contacto__datos rev" style="--i:1">
+      <h2 class="contacto__t">{d.visita.titulo}</h2>
+      <dl>
+        {u?.linea && (<><dt class="etiqueta">{e.direccion}</dt><dd>{u.nombre}<br />{u.detalle}<br />{u.linea}<br />{u.zona}<br />{u.ciudad}</dd></>)}
+        {c.horario?.length > 0 && (<><dt class="etiqueta">{e.horario}</dt><dd>{c.horario.map((h) => <span class="hora"><span>{h.dias}</span><span>{h.horas}</span></span>)}</dd></>)}
+        {c.correo && (<><dt class="etiqueta">{e.correo}</dt><dd><a href={`mailto:${c.correo}`}>{c.correo}</a></dd></>)}
+        {redes.length > 0 && (<><dt class="etiqueta">{e.redes}</dt><dd>{redes.map((r) => <a href={r.href} target="_blank" rel="noopener">{r.nombre} {r.usuario}<span class="sr-only"> ({sitio.ui.abreNuevaPestana})</span></a>)}</dd></>)}
+      </dl>
+      {u?.mapaEnlace && <div class="contacto__mapa"><Boton texto={sitio.ui.comoLlegar} href={u.mapaEnlace} variante="contorno" externo /></div>}
+      <div class="contacto__foto"><Recuadro ratio="1 / 1"><Foto base="estudio-recepcion" alt={d.mapa.alt} sizes="(min-width: 900px) 30vw, 92vw" /></Recuadro></div>
+    </div>
+    )}
+  </section>
+
+  <section class="seccion faq">
+    <div class="contenedor faq__in">
+      <Encabezado titulo={d.faq.titulo} />
+      <div class="faq__lista">
+        {faq.map((q) => (
+          <details class="rev">
+            <summary>{q.pregunta}</summary>
+            <p>{q.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cabecera-pagina { padding-bottom: clamp(32px, 5vw, 64px); }
+  .contacto { display: grid; gap: 4rem; }
+  .contacto__t { margin: 0; font-weight: 100; font-size: clamp(2.125rem, 1.5rem + 2vw, 3rem); line-height: 1.08; }
+  .contacto__datos { display: grid; gap: 1.25rem; align-content: start; }
+  dl { margin: 0.5rem 0 0; display: grid; gap: 0.4rem; }
+  dt { margin-top: 1rem; }
+  dd { margin: 0; }
+  dd a { display: flex; align-items: center; min-height: 44px; width: fit-content; }
+  .hora { display: flex; justify-content: space-between; gap: 1.5rem; max-width: 380px; border-bottom: 1px solid var(--linea); padding-block: 0.5rem; }
+  .contacto__mapa { margin-top: 0.5rem; }
+  .contacto__foto { max-width: 420px; margin-top: 1rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .faq__in { display: grid; gap: 3rem; max-width: 900px; }
+  details { border-top: 1px solid var(--linea); padding-block: 1.1rem; }
+  details:last-child { border-bottom: 1px solid var(--linea); }
+  summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.4rem); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-weight: 100; font-size: 1.8rem; line-height: 1; transition: transform 0.4s var(--ease); }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0.9rem 0 0; max-width: 60ch; color: var(--texto-suave); }
+
+  @media (min-width: 900px) {
+    .contacto { grid-template-columns: 1.1fr 0.9fr; gap: 7vw; }
+    .faq__in { grid-template-columns: 0.8fr 1.2fr; max-width: var(--max); gap: 6vw; }
+  }
+</style>

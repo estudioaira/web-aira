@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "titulo": "Planes y horarios de Aira, The Pilates House",
+    "descripcion": "Consulta los horarios de clase y los planes de Aira: clase de prueba, paquetes de 1 a 36 clases y planes compartidos. Reserva y compra en la app."
+  },
+  "encabezado": {
+    "etiqueta": "Planes y horarios",
+    "titulo": "Elige tu ritmo",
+    "texto": "Horarios de clase y planes para sostener tu práctica."
+  },
+  "planes": {
+    "titulo": "Elige tu ritmo",
+    "moneda": "COP",
+    "nota": "Valores y vigencias tomados de la app; pueden cambiar. Aplican términos y condiciones.",
+    "compartidoEtiqueta": "Plan compartido · 2 personas",
+    "porClase": "por clase",
+    "vigencia": "Vigencia",
+    "items": [
+      {
+        "nombre": "Clase de prueba",
+        "precio": 45000,
+        "porClase": null,
+        "vigencia": "8 días",
+        "compartido": false
+      },
+      {
+        "nombre": "1 clase",
+        "precio": 85000,
+        "porClase": null,
+        "vigencia": "7 días",
+        "compartido": false
+      },
+      {
+        "nombre": "4 clases",
+        "precio": 320000,
+        "porClase": 80000,
+        "vigencia": "1 mes",
+        "compartido": false
+      },
+      {
+        "nombre": "8 clases",
+        "precio": 580000,
+        "porClase": 72500,
+        "vigencia": "1 mes",
+        "compartido": false
+      },
+      {
+        "nombre": "12 clases",
+        "precio": 770000,
+        "porClase": 64167,
+        "vigencia": "1 mes",
+        "compartido": false
+      },
+      {
+        "nombre": "16 clases",
+        "precio": 880000,
+        "porClase": 55000,
+        "vigencia": "60 días",
+        "compartido": false
+      },
+      {
+        "nombre": "20 clases",
+        "precio": 1020000,
+        "porClase": 51000,
+        "vigencia": "60 días",
+        "compartido": true
+      },
+      {
+        "nombre": "36 clases",
+        "precio": 1640000,
+        "porClase": 45556,
+        "vigencia": "3 meses",
+        "compartido": true
+      }
+    ]
+  },
+  "horarios": {
+    "titulo": "Horarios de clase",
+    "texto": "Reserva tu cupo en la app. Cada clase es de hasta 6 personas.",
+    "cerrado": "Sin clases",
+    "dias": [
+      {
+        "dia": "Lunes a viernes",
+        "franjas": [
+          {
+            "etiqueta": "a. m.",
+            "horas": [
+              "6:30",
+              "7:30",
+              "8:30",
+              "9:30",
+              "10:30",
+              "11:30"
+            ]
+          },
+          {
+            "etiqueta": "p. m.",
+            "horas": [
+              "4:00",
+              "5:00",
+              "6:00",
+              "7:00"
+            ]
+          }
+        ]
+      },
+      {
+        "dia": "Sábados",
+        "franjas": [
+          {
+            "etiqueta": "a. m.",
+            "horas": [
+              "7:00",
+              "8:00",
+              "9:00",
+              "10:00",
+              "11:00",
+              "12:00"
+            ]
+          }
+        ]
+      },
+      {
+        "dia": "Domingos y festivos",
+        "franjas": []
+      }
+    ]
+  },
+  "gift": {
+    "titulo": "Una gift card a tu medida",
+    "texto": "La gift card de Aira es personalizada: tú eliges qué regalar. Escríbenos por WhatsApp, cuéntanos lo que tienes en mente y la preparamos para quien la va a recibir.",
+    "boton": "Pedir una gift card",
+    "mensaje": "Hola Aira, quiero una gift card personalizada. Esto es lo que quiero regalar: ",
+    "imagen": "gift-card",
+    "alt": "Gift card de Aira, The Pilates House: tarjeta color crema con flores en relieve y el texto It's your gift card"
+  },
+  "reglas": {
+    "titulo": "Nuestras reglas",
+    "texto": "Para que todas disfruten una experiencia cómoda y tranquila.",
+    "items": [
+      "Todos los paquetes tienen vigencia desde la fecha de compra; verifícala al adquirirlo.",
+      "Para cancelar una clase hazlo con mínimo 6 horas de anticipación; si no, no se reprograma.",
+      "La clase de prueba está sujeta a disponibilidad de día y hora.",
+      "Antes de empezar, deja tus zapatos y pertenencias en los lockers.",
+      "Si entras con tu celular a clase, que esté en silencio.",
+      "Al terminar, limpia tu reformer e implementos con los productos recomendados.",
+      "El respeto y la comunicación con profesores y compañeros son pilares del estudio.",
+      "Llega con tiempo: la puntualidad es respeto por ti y por los demás."
+    ]
+  }
+}

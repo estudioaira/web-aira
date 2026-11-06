@@ -1,0 +1,23 @@
+---
+import Boton from "./Boton.astro";
+import Encabezado from "./Encabezado.astro";
+import sitio from "../datos/sitio.json";
+import { enlaceWa } from "../lib/wa.js";
+const p = sitio.pruebaGratis;
+const dudas = enlaceWa(sitio.contacto.whatsapp, sitio.reservas.mensajeDudas);
+---
+<section class="prueba">
+  <div class="contenedor prueba__in">
+    <Encabezado titulo={p.titulo} texto={p.texto} alinear="centro" />
+    <div class="rev" style="--i:3"><Boton texto={p.boton} href={sitio.app.url} variante="solido" externo clase="boton--grande" /></div>
+    <a class="prueba__dudas rev" style="--i:4" href={dudas} target="_blank" rel="noopener">{p.dudas}<span class="sr-only"> ({sitio.ui.abreNuevaPestana})</span></a>
+  </div>
+</section>
+
+<style>
+  .prueba { background: var(--arena); color: var(--espresso); padding-block: clamp(72px, 10vw, 150px); }
+  .prueba :global(.lead) { color: var(--espresso); }
+  .prueba__in { display: grid; gap: 2.5rem; justify-items: center; text-align: center; }
+  .prueba__dudas { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>

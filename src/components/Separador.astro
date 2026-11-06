@@ -1,0 +1,14 @@
+---
+import { ruta } from "../lib/ruta.js";
+---
+<div class="sep" aria-hidden="true">
+  <span></span>
+  <img src={ruta("/brand/isotipo-espresso.png")} alt="" width="48" height="12" loading="lazy" />
+  <span></span>
+</div>
+
+<style>
+  .sep { display: flex; align-items: center; justify-content: center; gap: 1.25rem; color: var(--espresso); }
+  .sep span { height: 1px; width: min(18vw, 120px); background: var(--linea); }
+  .sep img { width: 48px; height: auto; }
+</style>

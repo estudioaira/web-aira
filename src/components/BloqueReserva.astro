@@ -1,0 +1,23 @@
+---
+import Boton from "./Boton.astro";
+import Encabezado from "./Encabezado.astro";
+import sitio from "../datos/sitio.json";
+import { enlaceWa } from "../lib/wa.js";
+const r = sitio.reservas;
+const dudas = enlaceWa(sitio.contacto.whatsapp, r.mensajeDudas);
+---
+<section class="reserva banda" id="reservas">
+  <div class="contenedor reserva__in">
+    <Encabezado titulo={r.titulo} texto={r.texto} alinear="centro" />
+    <div class="botones reserva__botones rev" style="--i:3">
+      <Boton texto={r.botonApp} href={sitio.app.url} variante="marfil" externo />
+      <Boton texto={r.botonDudas} href={dudas} variante="marfil-contorno" externo />
+    </div>
+  </div>
+</section>
+
+<style>
+  .reserva { padding-block: clamp(64px, 9vw, 130px); }
+  .reserva__in { display: grid; gap: 2.5rem; justify-items: center; text-align: center; }
+  .reserva__botones { justify-content: center; }
+</style>

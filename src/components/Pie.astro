@@ -1,0 +1,85 @@
+---
+import sitio from "../datos/sitio.json";
+import { ruta } from "../lib/ruta.js";
+import { enlaceWa } from "../lib/wa.js";
+import { tieneVisita, tieneConecta } from "../lib/visibilidad.js";
+const c = sitio.contacto;
+const wa = enlaceWa(c.whatsapp, c.mensajeReserva);
+const u = sitio.ubicacion;
+const redes = (c.redes ?? []).filter((r) => r.href);
+const legales = (sitio.legales ?? []).filter((l) => l.href);
+const creditos = sitio.pie.creditos;
+---
+<footer class="pie banda">
+  <div class="contenedor pie__in">
+    <div class="pie__marca">
+      <img src={ruta("/brand/logo-casa-marfil.png")} alt={`${sitio.nombre}, ${sitio.marca}`} width="260" height="95" loading="lazy" />
+      <p class="etiqueta">{sitio.eslogan}</p>
+    </div>
+
+    <nav class="pie__col" aria-label={sitio.pie.explorar}>
+      <h2 class="etiqueta">{sitio.pie.explorar}</h2>
+      {sitio.menu.map((i) => <a href={ruta(i.href)}>{i.texto}</a>)}
+    </nav>
+
+    {tieneVisita({ direccion: u, horario: c.horario }) && (
+    <div class="pie__col">
+      <h2 class="etiqueta">{sitio.pie.visitanos}</h2>
+      {u?.linea && <p>{u.nombre}<br />{u.detalle}<br />{u.linea}<br />{u.zona}<br />{u.ciudad}</p>}
+      {c.horario?.length > 0 && (
+        <p>{c.horario.map((h) => <span class="pie__h">{h.dias}: {h.horas}</span>)}</p>
+      )}
+    </div>
+    )}
+
+    {tieneConecta(c) && (
+    <div class="pie__col">
+      <h2 class="etiqueta">{sitio.pie.conecta}</h2>
+      {c.whatsappVisible && <a href={wa} target="_blank" rel="noopener">{c.whatsappVisible}<span class="sr-only"> ({sitio.ui.abreNuevaPestana})</span></a>}
+      {c.correo && <a href={`mailto:${c.correo}`}>{c.correo}</a>}
+      {redes.map((r) => <a href={r.href} target="_blank" rel="noopener">{r.nombre} {r.usuario}<span class="sr-only"> ({sitio.ui.abreNuevaPestana})</span></a>)}
+    </div>
+    )}
+  </div>
+
+  {u?.mapaEmbed && (
+  <div class="contenedor pie__mapa">
+    <iframe src={u.mapaEmbed} title={sitio.ui.mapaTitulo} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  </div>
+  )}
+
+  <div class="contenedor pie__base">
+    <p>&copy; {new Date().getFullYear()} {sitio.nombre}, {sitio.marca}</p>
+    {legales.length > 0 && <nav aria-label={sitio.pie.legal}>{legales.map((l) => <a href={ruta(l.href)}>{l.texto}</a>)}</nav>}
+    {creditos && (
+    <p class="pie__creditos">{creditos.texto}{" "}
+      {creditos.url
+        ? <a href={creditos.url} target="_blank" rel="noopener">{creditos.nombre}<span class="sr-only"> ({sitio.ui.abreNuevaPestana})</span></a>
+        : <span>{creditos.nombre}</span>}
+    </p>
+    )}
+  </div>
+</footer>
+
+<style>
+  .pie { padding-block: clamp(56px, 8vw, 104px) 28px; }
+  .pie__in { display: grid; gap: 3rem; grid-template-columns: 1fr; }
+  .pie__marca img { width: min(220px, 62%); height: auto; }
+  .pie__marca .etiqueta { margin-top: 1rem; }
+  .pie__col { display: grid; gap: 0; align-content: start; }
+  .pie__col h2 { margin: 0 0 0.6rem; }
+  .pie__col p { margin: 0; padding-block: 0.4rem; }
+  .pie__col a { text-decoration: none; width: fit-content; display: flex; align-items: center; min-height: 44px; background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat; transition: background-size 0.5s var(--ease); }
+  .pie__col a:hover { background-size: 100% 1px; }
+  .pie__col p { margin: 0; }
+  .pie__h { display: block; }
+  .pie__mapa { margin-top: clamp(40px, 6vw, 72px); }
+  .pie__mapa iframe { display: block; width: 100%; height: clamp(240px, 32vw, 340px); border: 0; filter: grayscale(0.35) sepia(0.15); }
+  .pie__base { margin-top: clamp(40px, 6vw, 80px); padding-top: 1.5rem; border-top: 1px solid rgba(246, 245, 227, 0.28); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.875rem; }
+  .pie__base p { margin: 0; }
+  .pie__base nav { display: flex; gap: 1.5rem; }
+  .pie__creditos { flex-basis: 100%; }
+  .pie__creditos a { text-underline-offset: 3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (min-width: 720px) { .pie__in { grid-template-columns: 1.3fr 1fr 1.3fr 1.3fr; } }
+</style>

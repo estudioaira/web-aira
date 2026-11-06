@@ -1,0 +1,27 @@
+---
+const {
+  base, alt,
+  anchos = [480, 800, 1200, 1800],
+  natural = "3 / 4",
+  sizes = "(min-width: 1024px) 40vw, 90vw",
+  prioridad = false, parallax = 0, clase = "",
+} = Astro.props;
+import { ruta } from "../lib/ruta.js";
+const mayor = anchos[anchos.length - 1];
+const [rw, rh] = natural.split("/").map(Number);
+const srcset = anchos.map((w) => `${ruta(`/img/${base}-${w}.webp`)} ${w}w`).join(", ");
+const medio = anchos.includes(800) ? 800 : anchos[0];
+---
+<img
+  src={ruta(`/img/${base}-${medio}.webp`)}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  width={mayor}
+  height={Math.round((mayor * rh) / rw)}
+  loading={prioridad ? "eager" : "lazy"}
+  fetchpriority={prioridad ? "high" : "auto"}
+  decoding="async"
+  class={clase}
+  data-parallax={parallax || undefined}
+/>
