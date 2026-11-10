@@ -1,0 +1,41 @@
+<div class="nieve" aria-hidden="true">
+  <span class="nieve__particula nieve__particula--1">✧</span>
+  <span class="nieve__particula nieve__particula--2">✳</span>
+  <span class="nieve__particula nieve__particula--3">✧</span>
+  <span class="nieve__particula nieve__particula--4">✳</span>
+  <span class="nieve__particula nieve__particula--5">✧</span>
+</div>
+
+<style>
+  .nieve {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 35;
+  }
+
+  .nieve__particula {
+    position: absolute;
+    top: -2rem;
+    color: var(--espresso);
+    opacity: 0.32;
+    font-size: 1.1rem;
+    animation: caer 12s linear infinite;
+  }
+
+  .nieve__particula--1 { left: 12%; animation-delay: -8s; }
+  .nieve__particula--2 { left: 31%; font-size: 0.8rem; animation-delay: -2s; animation-duration: 15s; }
+  .nieve__particula--3 { left: 57%; animation-delay: -11s; animation-duration: 14s; }
+  .nieve__particula--4 { left: 76%; font-size: 0.9rem; animation-delay: -5s; animation-duration: 16s; }
+  .nieve__particula--5 { left: 91%; animation-delay: -3s; animation-duration: 13s; }
+
+  @keyframes caer {
+    from { transform: translate3d(0, -2rem, 0) rotate(0deg); }
+    to { transform: translate3d(1.5rem, 110vh, 0) rotate(150deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nieve { display: none; }
+  }
+</style>

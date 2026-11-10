@@ -11,8 +11,10 @@ import PruebaGratis from "../components/PruebaGratis.astro";
 import inicio from "../datos/inicio.json";
 import sitio from "../datos/sitio.json";
 import { ruta } from "../lib/ruta.js";
+import AnimacionNavidena from "../components/AnimacionNavidena.astro";
 ---
 <Layout titulo={inicio.meta.titulo} descripcion={inicio.meta.descripcion} activa="inicio">
+  <AnimacionNavidena />
   <Portada datos={inicio.portada} appUrl={sitio.app.url} />
 
   <section class="seccion filosofia">
